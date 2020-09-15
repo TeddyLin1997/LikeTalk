@@ -1,5 +1,5 @@
 const express = require('express')
-const webSocketServer = require('ws').Server
+const webSocket = require('ws').Server
 
 // basic config
 const config = {
@@ -7,17 +7,15 @@ const config = {
   start: () => { console.log(`Server: is runing on port:${config.port}`) }
 }
 
-// user express server to new webSocketServer object
+// create websocket server
 const server = express().listen(config.port, config.start)
-const webSocketInstance = new webSocketServer({ server })
+const webSocketServer = new webSocket({ server })
 
 // listen connection event
-webSocketInstance.on('connection', (...client) => {
-  console.log('--client--', client)
-  console.log('client connected!!')
+webSocketServer.on('connection', (...client) => {
+  console.log('Server: client connected!!')
 })
 
-webSocketInstance.on('close', (...args)=> {
-  console.log('--close--', args)
-  console.log('client close connected!!')
+webSocketServer.on('close', (...args)=> {
+  console.log('Server: client close connected!!')
 })
