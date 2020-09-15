@@ -1,11 +1,12 @@
 {
   "name": "online-chatroom",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "repository": "https://github.com/ChrisLin1997/online-chatroom.git",
   "author": "ChrisLin <i100308326@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "express": "^4.17.1",
     "ws": "^7.3.1"
   }
 }
