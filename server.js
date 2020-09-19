@@ -12,10 +12,15 @@ const server = express().listen(config.port, config.start)
 const webSocketServer = new webSocket({ server })
 
 // listen connection event
-webSocketServer.on('connection', (...client) => {
-  console.log('Server: client connected!!')
-})
+webSocketServer.on('connection', webSocket => {
+  
+  webSocket.on('message', data => {
+    webSocketServer.clients.forEach(client => {
+      client.send(data)
+    })
+  })
 
-webSocketServer.on('close', (...args)=> {
-  console.log('Server: client close connected!!')
+  webSocket.on('close', ()=> {
+    console.log('Server: client close connected!!')
+  })
 })

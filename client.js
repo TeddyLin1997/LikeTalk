@@ -5,6 +5,11 @@ const webSocketClient = new WebSocket('ws://localhost:3000')
 webSocketClient.onopen = () => {
   console.log('Client: connected!!')
 }
+
 webSocketClient.onclose = () => {
   console.log('Client: close!!')
+}
+
+webSocketClient.onmessage = event => {
+  console.log(JSON.parse(event.data))
 }
