@@ -2,5 +2,5 @@
 
 ### multiplayer online chatroom
 
-- node press
+- node express
 - web socket

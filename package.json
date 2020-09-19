@@ -5,6 +5,9 @@
   "repository": "https://github.com/ChrisLin1997/online-chatroom.git",
   "author": "ChrisLin <i100308326@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "server": "node ./src/server/index"
+  },
   "dependencies": {
     "express": "^4.17.1",
     "ws": "^7.3.1"
