@@ -2,42 +2,24 @@ window.addEventListener('keypress', event => {
   if (event.key === 'Enter') sendMessage()
 })
 
-var webSocketClient = null
+let webSocketClient = null
+let userId = null 
 
 function creatConnect (name) {
   webSocketClient = new WebSocket('ws://localhost:3000')
 
   webSocketClient.onopen = () => {
-    console.log('open')
     webSocketClient.send(JSON.stringify({ name }))
   }
 
-  webSocketClient.onclose = () => {
-    console.log('close')
-    webSocketClient.send(JSON.stringify({ name }))
-  }
+  // webSocketClient.onclose = (event) => {
+  //   webSocketClient.send(JSON.stringify({ name }))
+  // }
 
   webSocketClient.onmessage = event => {
-    console.log(event.data)
     const data = JSON.parse(event.data)
-
     if (data.message === undefined) return 
-    const messageNode = document.createElement('div')
-    messageNode.classList.add('message')
-    if (name === event.name) messageNode.classList.add('right')
-    else messageNode.classList.add('left')
-
-    const titleNode = document.createElement('h5')
-    titleNode.innerText = data.name
-
-    const contentNode = document.createElement('p')
-    contentNode.innerText = data.message
-
-    const chatroom = document.getElementsByClassName('chatroom')[0]
-
-    messageNode.appendChild(titleNode)
-    messageNode.appendChild(contentNode)
-    chatroom.appendChild(messageNode)
+    else createMessageElement(data)
   }
 }
 
@@ -46,14 +28,15 @@ function sendMessage () {
   const name = document.getElementById('name').value
 
   webSocketClient.send(JSON.stringify({ name, message }))
+  document.getElementById('message').value = ''
 }
 
 function login () {
-  const name = document.getElementById('name').value
-  if (validation(name) === false) return
+  userId = document.getElementById('name').value
+  if (validation(userId) === false) return
   
   changePage()
-  creatConnect(name)
+  creatConnect(userId)
 }
 
 function changePage () {
@@ -77,4 +60,24 @@ function validation (name) {
   }
 
   return result
+}
+
+function createMessageElement (data) {
+  const messageNode = document.createElement('div')
+
+  if (userId === data.name) messageNode.classList.add('right')
+  else messageNode.classList.add('left')
+  messageNode.classList.add('message')
+
+  const titleNode = document.createElement('h5')
+  titleNode.innerText = data.name
+
+  const contentNode = document.createElement('p')
+  contentNode.innerText = data.message
+
+  const chatroom = document.getElementsByClassName('chatroom')[0]
+
+  messageNode.appendChild(titleNode)
+  messageNode.appendChild(contentNode)
+  chatroom.appendChild(messageNode)
 }

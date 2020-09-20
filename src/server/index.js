@@ -15,15 +15,11 @@ const webSocketServer = new webSocket({ server })
 webSocketServer.on('connection', webSocket => {
   
   webSocket.on('message', data => {
-    // server
+    webSocketServer.clients.forEach(client => { client.send(data) })
     console.log(`Server: ${JSON.parse(data).name} => connected`)
-    // client
-    webSocketServer.clients.forEach(client => {
-      client.send(data)
-    })
   })
 
-  webSocket.on('close', (event) => {
-    console.log('關閉', event)
-  })
+  // webSocket.on('close', data => {
+    // webSocketServer.clients.forEach(client => { client.send(JSON.stringify(data)) })
+  // })
 })

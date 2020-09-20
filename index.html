@@ -21,22 +21,9 @@
 
   <div class="chatroom">
 
-    <div class="message left">
-      <h5>Chris</h5>
-      <p>hello</p>
-    </div>
-    <div class="message right">
-      <h5>legoKing</h5>
-      <p>這個是什麼啊</p>
-    </div>
-    <div class="message left">
-      <h5>Elon Musk</h5>
-      <p>要不要吃好吃的</p>
-    </div>
-
     <div class="reaction">
       <input id="message" type="text" />
-      <button onclick="sendMessage()">SEND</button>
+      <button onclick="createMessageElement()">SEND</button>
     </div>
   </div>
 
@@ -125,7 +112,7 @@ body {
 }
 
 .message {
-  margin: 6px 10px 20px 10px;
+  margin: 6px 10px 0 10px;
   width: fit-content;
   height: fit-content;
   max-width: 80%;
@@ -142,12 +129,10 @@ body {
 .message p {
   margin: 6px 0 0 6px;
   margin-left: 6px;
-  padding: 6px 16px;
+  padding: 8px 16px;
   font-size: 16px;
   text-align: left;
-  color: #000;
   border-radius: 16px;
-  background-color: aliceblue;
 }
 
 .left {
@@ -155,9 +140,23 @@ body {
   clear: both;
 }
 
+.left p {
+  color: #fff;
+  background-color: #444;
+}
+
 .right {
   float: right;
   clear: both;
+}
+
+.right h5 {
+  display: none;
+}
+
+.right p {
+  color: #222;
+  background-color: #7DB9DE;
 }
 
 .reaction {
