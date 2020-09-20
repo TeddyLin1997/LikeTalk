@@ -1,12 +1,16 @@
+let webSocketClient = null
+let userId = null 
+const chatroom = document.getElementsByClassName('chatroom')[0]
+
+
 window.addEventListener('keypress', event => {
-  if (event.key === 'Enter') sendMessage()
+  if (event.key !== 'Enter') return
+  if (userId) sendMessage()
+  else login()
 })
 window.addEventListener('beforeunload', () => {
   webSocketClient.send(JSON.stringify({ name: userId, status: 'close' }))
 })
-
-let webSocketClient = null
-let userId = null 
 
 function creatConnect (name) {
   webSocketClient = new WebSocket('ws://localhost:3000')
@@ -17,17 +21,9 @@ function creatConnect (name) {
 
   webSocketClient.onmessage = event => {
     const data = JSON.parse(event.data)
-    if (data.message === undefined) return 
-    else createMessageElement(data)
+    if (data.message) createMessageElement(data)
+    else userStatusElement(data)
   }
-}
-
-function sendMessage () {
-  const message = document.getElementById('message').value
-  const name = document.getElementById('name').value
-
-  webSocketClient.send(JSON.stringify({ name, message }))
-  document.getElementById('message').value = ''
 }
 
 function login () {
@@ -40,7 +36,6 @@ function login () {
 
 function changePage () {
   const login = document.getElementsByClassName('login')[0]
-  const chatroom = document.getElementsByClassName('chatroom')[0]
 
   login.style.display = 'none'
   chatroom.style.display = 'unset'
@@ -48,17 +43,17 @@ function changePage () {
 
 function validation (name) {
   const errorLabel = document.getElementsByClassName('error')[0]
-  let result = true
+  errorLabel.style.display = name ? 'unset' : 'none'
 
-  if (name === '') {
-    errorLabel.style.display = 'unset'
-    result = false
-  } else {
-    errorLabel.style.display = 'none'
-    result = true
-  }
+  return Boolean(name)
+}
 
-  return result
+function sendMessage () {
+  const message = document.getElementById('message').value
+  if (message === '') return
+
+  webSocketClient.send(JSON.stringify({ name: userId, message }))
+  document.getElementById('message').value = ''
 }
 
 function createMessageElement (data) {
@@ -74,9 +69,23 @@ function createMessageElement (data) {
   const contentNode = document.createElement('p')
   contentNode.innerText = data.message
 
-  const chatroom = document.getElementsByClassName('chatroom')[0]
-
   messageNode.appendChild(titleNode)
   messageNode.appendChild(contentNode)
-  chatroom.appendChild(messageNode)
+
+  appendElement(messageNode)
+}
+
+function userStatusElement (data) {
+  const statusMessage = document.createElement('div')
+  const status = data.status === 'connect' ? 'join' : 'leave'
+
+  statusMessage.innerText = `${data.name}  ${status} the chatroom`
+  statusMessage.classList.add('center')
+
+  appendElement(statusMessage)
+}
+
+function appendElement (node) {
+  chatroom.appendChild(node)
+  chatroom.scrollTo({ top: chatroom.scrollHeight, behavior: 'smooth' })
 }
