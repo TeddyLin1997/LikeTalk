@@ -1,7 +1,5 @@
 ## online-chatroom
 
-### multiplayer online chatroom
-
 ### server
 
 - node express server
