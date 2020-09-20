@@ -2,5 +2,12 @@
 
 ### multiplayer online chatroom
 
-- node express
-- web socket
+### server
+
+- node express server
+- webSocket server
+
+### client
+
+- javaScript
+- webSocket
