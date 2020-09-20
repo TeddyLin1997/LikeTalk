@@ -6,8 +6,186 @@
   <title>multiple online chatroom</title>
 </head>
 <body>
-  
+  <div class="login">
+    <div class="title">
+      <h2>Talking Room</h1>
+    </div>
+    <div class="signIn">
+      <label>Sign in</label>
+      <input id="name" placeholder="userID" type="text" />
+      <button id="enterBtn" type="submit" onclick="login()">Enter</button>
+    </div>
 
-<script src="./client.js"></script>
+    <label class="error">please input correct userID</label>
+  </div>
+
+  <div class="chatroom">
+
+    <div class="reaction">
+      <input id="message" type="text" />
+      <button onclick="createMessageElement()">SEND</button>
+    </div>
+  </div>
+
+
+
+<script src="./src/client/index.js"></script>
 </body>
 </html>
+
+<style>
+* {
+  outline: none;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+}
+
+html {
+  background-color: #222;
+  font-size: 22px;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+}
+
+.login {
+  padding-top: 100px;
+}
+
+.title h2 {
+  color: white;
+}
+
+.signIn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  width: 300px;
+  height: 200px;
+  border-radius: 1rem;
+  background-color: #1E88A8;
+}
+
+#name {
+  height: 42px;
+  border: none;
+  border-radius: 2rem;
+  color: #000;
+}
+
+#enterBtn {
+  height: 40px;
+  border: none;
+  border-radius: 2rem;
+  background-color: #006284;
+  transition: opacity .2s; 
+}
+
+#enterBtn:hover {
+  opacity: .7;
+  cursor: pointer;
+}
+
+.error {
+  display: none;
+  margin-top: 20px;
+  font-size: 14px;
+  color: red;
+}
+
+.chatroom {
+  display: none;
+  width: 100%;
+  max-width: 768px;
+  height: 100vh;
+  overflow: auto;
+  background-color: #333;
+}
+
+.message {
+  margin: 6px 10px 0 10px;
+  width: fit-content;
+  height: fit-content;
+  max-width: 80%;
+}
+
+.message h5 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #aaa;
+  margin: 0;
+  text-align: left;
+}
+
+.message p {
+  margin: 6px 0 0 6px;
+  margin-left: 6px;
+  padding: 8px 16px;
+  font-size: 16px;
+  text-align: left;
+  border-radius: 16px;
+}
+
+.left {
+  float: left;
+  clear: both;
+}
+
+.left p {
+  color: #fff;
+  background-color: #444;
+}
+
+.right {
+  float: right;
+  clear: both;
+}
+
+.right h5 {
+  display: none;
+}
+
+.right p {
+  color: #222;
+  background-color: #7DB9DE;
+}
+
+.reaction {
+  display: flex;
+  width: 100%;
+  max-width: 768px;
+  position: fixed;
+  bottom: 0px;
+}
+
+.reaction input {
+  width: 100%;
+  max-width: 768px;
+  height: 50px;
+  text-align: left;
+  color: #000;
+  font-size: 16px;
+}
+
+.reaction button {
+  width: 100px;
+  height: 50px;
+  border: none;
+  background-color: #1E88A8;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+
+.reaction button:active {
+  opacity: .5;
+}
+</style>
