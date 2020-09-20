@@ -20,7 +20,19 @@
   </div>
 
   <div class="chatroom">
-    <span>聊天室</span>
+
+    <div class="message left">
+      <h5>Chris</h5>
+      <p>hello</p>
+    </div>
+    <div class="message right">
+      <h5>legoKing</h5>
+      <p>這個是什麼啊</p>
+    </div>
+    <div class="message left">
+      <h5>Elon Musk</h5>
+      <p>要不要吃好吃的</p>
+    </div>
 
     <div class="reaction">
       <input id="message" type="text" />
@@ -108,7 +120,44 @@ body {
   width: 100%;
   max-width: 768px;
   height: 100vh;
+  overflow: auto;
   background-color: #333;
+}
+
+.message {
+  margin: 6px 10px 20px 10px;
+  width: fit-content;
+  height: fit-content;
+  max-width: 80%;
+}
+
+.message h5 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #aaa;
+  margin: 0;
+  text-align: left;
+}
+
+.message p {
+  margin: 6px 0 0 6px;
+  margin-left: 6px;
+  padding: 6px 16px;
+  font-size: 16px;
+  text-align: left;
+  color: #000;
+  border-radius: 16px;
+  background-color: aliceblue;
+}
+
+.left {
+  float: left;
+  clear: both;
+}
+
+.right {
+  float: right;
+  clear: both;
 }
 
 .reaction {
