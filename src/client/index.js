@@ -1,6 +1,9 @@
 window.addEventListener('keypress', event => {
   if (event.key === 'Enter') sendMessage()
 })
+window.addEventListener('beforeunload', () => {
+  webSocketClient.send(JSON.stringify({ name: userId, status: 'close' }))
+})
 
 let webSocketClient = null
 let userId = null 
@@ -9,12 +12,8 @@ function creatConnect (name) {
   webSocketClient = new WebSocket('ws://localhost:3000')
 
   webSocketClient.onopen = () => {
-    webSocketClient.send(JSON.stringify({ name }))
+    webSocketClient.send(JSON.stringify({ name, status: 'connect' }))
   }
-
-  // webSocketClient.onclose = (event) => {
-  //   webSocketClient.send(JSON.stringify({ name }))
-  // }
 
   webSocketClient.onmessage = event => {
     const data = JSON.parse(event.data)

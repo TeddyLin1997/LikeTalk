@@ -18,8 +18,4 @@ webSocketServer.on('connection', webSocket => {
     webSocketServer.clients.forEach(client => { client.send(data) })
     console.log(`Server: ${JSON.parse(data).name} => connected`)
   })
-
-  // webSocket.on('close', data => {
-    // webSocketServer.clients.forEach(client => { client.send(JSON.stringify(data)) })
-  // })
 })
