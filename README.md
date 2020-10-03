@@ -1,4 +1,4 @@
-## online-chatroom
+## LikeTalk
 
 ## [Demo](https://chrislin1997.github.io/online-chatroom/)
 
