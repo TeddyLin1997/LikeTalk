@@ -1,7 +1,5 @@
 ## LikeTalk
 
-## [Demo](https://chrislin1997.github.io/online-chatroom/)
-
 ### server
 
 - node express server
@@ -11,3 +9,16 @@
 
 - javaScript
 - webSocket
+
+## use
+
+### 1.run web socket server
+```javascript=
+$ yarn server
+```
+
+### 2.connect client
+```javascript=
+// open the index.html to connect
+```
+
